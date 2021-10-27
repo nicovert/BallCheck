@@ -12,21 +12,21 @@
         <!--    Visiting Team    -->
         <ImageView
             android:id="@+id/teamImageAway"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="-30dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:src="@drawable/unknown" />
+            android:src="@drawable/logo_unknown" />
 
         <TextView
             android:id="@+id/tricodeAway"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_below="@id/scoreAway"
-            android:layout_alignRight="@id/scoreAway"
-            android:layout_marginLeft="5dp"
+            android:layout_alignLeft="@id/scoreAway"
+            android:layout_marginLeft="-5dp"
             android:text="UNK"
             android:textSize="20sp" />
 
@@ -35,29 +35,29 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_alignLeft="@id/teamImageAway"
-            android:layout_marginLeft="160dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginLeft="125dp"
+            android:layout_marginTop="40dp"
             android:text="0"
             android:textSize="40sp" />
 
         <!--    Home Team    -->
         <ImageView
             android:id="@+id/teamImageHome"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_alignParentRight="true"
             android:layout_marginTop="10dp"
             android:layout_marginRight="-30dp"
             android:layout_marginBottom="10dp"
-            android:src="@drawable/unknown" />
+            android:src="@drawable/logo_unknown" />
 
         <TextView
             android:id="@+id/tricodeHome"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_below="@id/scoreHome"
-            android:layout_alignLeft="@id/scoreHome"
-            android:layout_marginRight="5dp"
+            android:layout_alignRight="@id/scoreHome"
+            android:layout_marginRight="-5dp"
             android:text="UNK"
             android:textSize="20sp" />
 
@@ -66,8 +66,8 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_alignRight="@id/teamImageHome"
-            android:layout_marginTop="60dp"
-            android:layout_marginRight="160dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="125dp"
             android:text="0"
             android:textSize="40sp" />
 
@@ -77,17 +77,17 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="monospace"
             android:text="QTR 0:00"
             android:textSize="25sp" />
 
         <ImageView
             android:id="@+id/imageSeparator"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="85dp"
+            android:layout_marginTop="80dp"
             android:src="@drawable/ic_circle" />
 
     </RelativeLayout>
