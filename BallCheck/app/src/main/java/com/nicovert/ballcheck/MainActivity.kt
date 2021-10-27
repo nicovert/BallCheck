@@ -61,6 +61,8 @@ class MainActivity : AppCompatActivity() {
         } else if (sharedPref.getString("theme","system").equals("system")) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         }
+
+        refreshNow(navController.currentDestination?.id)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -70,10 +72,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId === R.id.menuRefresh) {
-            Toast.makeText(this, "Refreshing...", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "Refreshing...", Toast.LENGTH_SHORT).show()
             Log.d("this",navController.currentDestination?.id.toString())
             Log.d("nbanowid",R.id.NBANowFragment.toString())
             refreshNow(navController.currentDestination?.id)
+            return true
         }
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
@@ -86,14 +89,8 @@ class MainActivity : AppCompatActivity() {
         val openURL = Intent(android.content.Intent.ACTION_VIEW)
         if (view.id === thanksMaterialIcons.id) {
             openURL.data = Uri.parse("https://github.com/google/material-design-icons")
-        } else if (view.id === thanksFeather.id) {
-            openURL.data = Uri.parse("https://github.com/feathericons/feather")
         } else if (view.id === thanksApache.id) {
             openURL.data = Uri.parse("https://www.apache.org/licenses/LICENSE-2.0")
-        } else if (view.id === thanksCC.id) {
-            openURL.data = Uri.parse("https://creativecommons.org/licenses/by-sa/4.0/")
-        } else if (view.id === thanksMIT.id) {
-            openURL.data = Uri.parse("https://mit-license.org/")
         }
         startActivity(openURL)
     }
@@ -120,7 +117,7 @@ class MainActivity : AppCompatActivity() {
             } else if (id == R.id.WNBANowFragment) {
                 Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Error Refreshing", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "Error Refreshing", Toast.LENGTH_SHORT).show()
             }
         } else {
             return
@@ -197,33 +194,44 @@ class MainActivity : AppCompatActivity() {
                             hTeamName = hTeamArr[2].toLowerCase()
                             hTeamTri = hTeamArr[3]
                         } catch (e: Exception) {
-                            //Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
                             Log.d("stringarray","catch")
                         }
 
                         val vTeamLogoID = resources.getIdentifier("logo_$vTeamName","drawable", packageName)
                         val hTeamLogoID = resources.getIdentifier("logo_$hTeamName","drawable", packageName)
 
-//                      get scores (game in progress)
-                        if(gameProgress == 2 || gameProgress == 3) {
-                            vScore = vTeam.getString("score")
-                            hScore = hTeam.getString("score")
-                        }
-                        //set score separator icon according to winning team
+                        var sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
                         var dotID = resources.getIdentifier("ic_at", "drawable", packageName)
-                        if (vScore > hScore) {
-                            //visiting team winning
-                            dotID = resources.getIdentifier("ic_arrow_left", "drawable", packageName)
-                        } else if (vScore < hScore) {
-                            //home team winning
-                            dotID = resources.getIdentifier("ic_arrow_right", "drawable", packageName)
+                        //scores if not hidden
+                        if (!sharedPref.getBoolean("hideScores",false)) {
+                            //get scores (game in progress or finished)
+                            if(gameProgress == 2 || gameProgress == 3) {
+                                vScore = vTeam.getString("score")
+                                hScore = hTeam.getString("score")
+                            }
+                            //set score separator icon according to winning team
+                            if (vScore > hScore) {
+                                //visiting team winning
+                                dotID = resources.getIdentifier("ic_arrow_left", "drawable", packageName)
+                            } else if (vScore < hScore) {
+                                //home team winning
+                                dotID = resources.getIdentifier("ic_arrow_right", "drawable", packageName)
+                            }
                         }
+
 
                         // create item for recycler
                         val nowGame = NowItem(vTeamLogoID, hTeamLogoID, dotID, clock, vTeamTri, hTeamTri, vScore, hScore)
-                        nowList += nowGame
-                    }
 
+                        //add item to list, to top if favorite team
+                        val favTeam = sharedPref.getString("favoriteNBA", "none")
+                        if  (favTeam != "none" && (favTeam == vTeamName || favTeam == hTeamName)) {
+                            nowList.add(0, nowGame)
+                        } else {
+                            nowList += nowGame
+                        }
+                    }
+                    Log.d("RefreshNBA: ", "recycler")
                     recycler_view.adapter = NowAdapter(nowList)
                     recycler_view.layoutManager = LinearLayoutManager(this)
                     recycler_view.setHasFixedSize(true)
@@ -259,7 +267,7 @@ class MainActivity : AppCompatActivity() {
         queue = Volley.newRequestQueue(this)
         val request = JsonObjectRequest(Request.Method.GET, url, null,
             Response.Listener {
-                Log.d("RefreshNBA: ", "Volley api call success")
+                Log.d("StillActive: ", "Volley api call success")
                 try {
                     val gamesArr = it.getJSONArray("games")
                     for (i in 0 until gamesArr.length()) {

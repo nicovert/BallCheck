@@ -2,7 +2,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".SettingsFragment">
 
-    <PreferenceCategory app:title="Appearance"
+    <PreferenceCategory
+        app:title="General"
+        app:icon="@drawable/ic_settings">
+
+        <ListPreference
+            app:title="Favorite NBA Team"
+            app:useSimpleSummaryProvider="true"
+            app:defaultValue="none"
+            app:dialogTitle="Choose a Team"
+            app:entries="@array/nba_teams_entries"
+            app:entryValues="@array/nba_teams_values"
+            app:key="favoriteNBA"/>
+
+        <SwitchPreference
+            app:title="Hide Scores"
+            app:defaultValue="false"
+            app:key="hideScores"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="Appearance"
         app:icon="@drawable/ic_palette">
 
         <ListPreference
