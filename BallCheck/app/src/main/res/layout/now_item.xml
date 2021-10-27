@@ -24,8 +24,8 @@
             android:id="@+id/tricodeAway"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:layout_below="@id/scoreAway"
-            android:layout_alignLeft="@id/scoreAway"
+            android:layout_marginTop="100dp"
+            android:layout_toLeftOf="@id/imageSeparator"
             android:layout_marginLeft="-5dp"
             android:text="UNK"
             android:textSize="20sp" />
@@ -55,8 +55,8 @@
             android:id="@+id/tricodeHome"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:layout_below="@id/scoreHome"
-            android:layout_alignRight="@id/scoreHome"
+            android:layout_marginTop="100dp"
+            android:layout_toRightOf="@id/imageSeparator"
             android:layout_marginRight="-5dp"
             android:text="UNK"
             android:textSize="20sp" />
@@ -77,18 +77,20 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
-            android:fontFamily="monospace"
+            android:layout_marginTop="10dp"
             android:text="QTR 0:00"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:background="@drawable/rounded_corner_view"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"/>
 
         <ImageView
             android:id="@+id/imageSeparator"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="80dp"
-            android:src="@drawable/ic_circle" />
+            android:layout_marginTop="90dp"
+            android:src="@drawable/ic_at" />
 
     </RelativeLayout>
 

@@ -142,7 +142,7 @@ class MainActivity : AppCompatActivity() {
                         var vScore = "-"
                         var hScore = "-"
 //                      get clock
-                        var clock = game.getString("clock")
+                        var clock: String
 //                      before game start, provide starting time and zero score
                         if (gameProgress == 1) {
                             if (game.getBoolean("isStartTimeTBD")) {
@@ -151,12 +151,27 @@ class MainActivity : AppCompatActivity() {
                                 val startTime = game.getString("startTimeUTC")
                                 clock = timezone(startTime)
                             }
-                        } else if (gameProgress == 3) {
+                        } else if (gameProgress == 3) { //game ended, check for overtime
                             clock = "FINAL"
                             val gamePeriods = game.getJSONObject("period")
                             if (gamePeriods.getInt("current") > gamePeriods.getInt("maxRegular")) {
                                 clock = "FINAL/OT"
                             }
+                        } else {
+                            val gamePeriods = game.getJSONObject("period")
+                            val quarter = gamePeriods.getInt("current")
+                            var quarterString = ""
+                            if (quarter == 1)
+                                quarterString = "1ST "
+                            else if (quarter == 2)
+                                quarterString = "2ND "
+                            else if (quarter == 3)
+                                quarterString = "3RD "
+                            else if (quarter == 4)
+                                quarterString = "4TH "
+                            else if (quarter > gamePeriods.getInt("maxRegular"))
+                                quarterString = "OT "
+                            clock = ""+ quarterString + game.getString("clock")
                         }
 //                      get team info (name, tricode, logo) via ids and local string arrays
                         val vTeam = game.getJSONObject("vTeam")
@@ -195,7 +210,7 @@ class MainActivity : AppCompatActivity() {
                             hScore = hTeam.getString("score")
                         }
                         //set score separator icon according to winning team
-                        var dotID = resources.getIdentifier("ic_circle", "drawable", packageName)
+                        var dotID = resources.getIdentifier("ic_at", "drawable", packageName)
                         if (vScore > hScore) {
                             //visiting team winning
                             dotID = resources.getIdentifier("ic_arrow_left", "drawable", packageName)
