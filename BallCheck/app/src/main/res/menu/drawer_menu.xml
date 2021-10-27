@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/drawerGroupNBA">
+        <item
+            android:id="@+id/drawerMenu_NBA_title"
+            android:title="NBA"
+            android:icon="@drawable/logo_nba_sq"/>
+        <item
+            android:id="@+id/NBANowFragment"
+            android:title="Now"/>
+    </group>
+
+    <group
+        android:id="@+id/drawerGroupWNBA">
+        <item
+            android:id="@+id/drawerMenu_WNBA_title"
+            android:title="WNBA"
+            android:icon="@drawable/logo_wnba_sq"/>
+        <item
+            android:id="@+id/WNBANowFragment"
+            android:title="Now"/>
+    </group>
+
+</menu>

@@ -1,0 +1,18 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".SettingsFragment">
+
+    <PreferenceCategory app:title="Appearance"
+        app:icon="@drawable/ic_palette">
+
+        <ListPreference
+            app:title="Theme"
+            app:useSimpleSummaryProvider="true"
+            app:defaultValue="system"
+            app:dialogTitle="Choose Theme"
+            app:entries="@array/theme_entries"
+            app:entryValues="@array/theme_values"
+            app:key="theme" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

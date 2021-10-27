@@ -1,0 +1,195 @@
+<resources>
+    <!-- Theme Preference -->
+    <string-array name="theme_entries">
+        <item>Light Mode</item>
+        <item>Dark Mode</item>
+        <item>System (Auto)</item>
+    </string-array>
+    <string-array name="theme_values">
+        <item>light</item>
+        <item>dark</item>
+        <item>system</item>
+    </string-array>
+
+    <!--  NBA Teams  -->
+    <string-array name="id1610612737">
+        <item>1610612737</item>
+        <item>Atlanta</item>
+        <item>Hawks</item>
+        <item>ATL</item>
+    </string-array>
+    <string-array name="id1610612738">
+        <item>1610612738</item>
+        <item>Boston</item>
+        <item>Celtics</item>
+        <item>BOS</item>
+    </string-array>
+    <string-array name="id1610612751">
+        <item>1610612751</item>
+        <item>Brooklyn</item>
+        <item>Nets</item>
+        <item>BKN</item>
+    </string-array>
+    <string-array name="id1610612766">
+        <item>1610612766</item>
+        <item>Charlotte</item>
+        <item>Hornets</item>
+        <item>CHA</item>
+    </string-array>
+    <string-array name="id1610612741">
+        <item>1610612741</item>
+        <item>Chicago</item>
+        <item>Bulls</item>
+        <item>CHI</item>
+    </string-array>
+    <string-array name="id1610612739">
+        <item>1610612739</item>
+        <item>Cleveland</item>
+        <item>Cavaliers</item>
+        <item>CLE</item>
+    </string-array>
+    <string-array name="id1610612742">
+        <item>1610612742</item>
+        <item>Dallas</item>
+        <item>Mavericks</item>
+        <item>DAL</item>
+    </string-array>
+    <string-array name="id1610612743">
+        <item>1610612743</item>
+        <item>Denver</item>
+        <item>Nuggets</item>
+        <item>DEN</item>
+    </string-array>
+    <string-array name="id1610612765">
+        <item>1610612765</item>
+        <item>Detroit</item>
+        <item>Pistons</item>
+        <item>DET</item>
+    </string-array>
+    <string-array name="id1610612744">
+        <item>1610612744</item>
+        <item>Golden State</item>
+        <item>Warriors</item>
+        <item>GSW</item>
+    </string-array>
+    <string-array name="id1610612745">
+        <item>1610612745</item>
+        <item>Houston</item>
+        <item>Rockets</item>
+        <item>HOU</item>
+    </string-array>
+    <string-array name="id1610612754">
+        <item>1610612754</item>
+        <item>Indiana</item>
+        <item>Pacers</item>
+        <item>IND</item>
+    </string-array>
+    <string-array name="id1610612746">
+        <item>1610612746</item>
+        <item>LA</item>
+        <item>Clippers</item>
+        <item>LAC</item>
+    </string-array>
+    <string-array name="id1610612747">
+        <item>1610612747</item>
+        <item>Los Angeles</item>
+        <item>Lakers</item>
+        <item>LAL</item>
+    </string-array>
+    <string-array name="id1610612763">
+        <item>1610612763</item>
+        <item>Memphis</item>
+        <item>Grizzlies</item>
+        <item>MEM</item>
+    </string-array>
+    <string-array name="id1610612748">
+        <item>1610612748</item>
+        <item>Miami</item>
+        <item>Heat</item>
+        <item>MIA</item>
+    </string-array>
+    <string-array name="id1610612749">
+        <item>1610612749</item>
+        <item>Milwaukee</item>
+        <item>Bucks</item>
+        <item>MIL</item>
+    </string-array>
+    <string-array name="id1610612750">
+        <item>1610612750</item>
+        <item>Minnesota</item>
+        <item>Timberwolves</item>
+        <item>MIN</item>
+    </string-array>
+    <string-array name="id1610612740">
+        <item>1610612740</item>
+        <item>New Orleans</item>
+        <item>Pelicans</item>
+        <item>NOP</item>
+    </string-array>
+    <string-array name="id1610612752">
+        <item>1610612752</item>
+        <item>New York</item>
+        <item>Knicks</item>
+        <item>NYK</item>
+    </string-array>
+    <string-array name="id1610612760">
+        <item>1610612760</item>
+        <item>Oklahoma City</item>
+        <item>Thunder</item>
+        <item>OKC</item>
+    </string-array>
+    <string-array name="id1610612753">
+        <item>1610612753</item>
+        <item>Orlando</item>
+        <item>Magic</item>
+        <item>ORL</item>
+    </string-array>
+    <string-array name="id1610612755">
+        <item>1610612755</item>
+        <item>Philadelphia</item>
+        <item>76ers</item>
+        <item>PHI</item>
+    </string-array>
+    <string-array name="id1610612756">
+        <item>1610612756</item>
+        <item>Phoenix</item>
+        <item>Suns</item>
+        <item>PHX</item>
+    </string-array>
+    <string-array name="id1610612757">
+        <item>1610612757</item>
+        <item>Portland</item>
+        <item>Trail Blazers</item>
+        <item>POR</item>
+    </string-array>
+    <string-array name="id1610612758">
+        <item>1610612758</item>
+        <item>Sacramento</item>
+        <item>Kings</item>
+        <item>SAC</item>
+    </string-array>
+    <string-array name="id1610612759">
+        <item>1610612759</item>
+        <item>San Antonio</item>
+        <item>Spurs</item>
+        <item>SAS</item>
+    </string-array>
+    <string-array name="id1610612761">
+        <item>1610612761</item>
+        <item>Toronto</item>
+        <item>Raptors</item>
+        <item>TOR</item>
+    </string-array>
+    <string-array name="id1610612762">
+        <item>1610612762</item>
+        <item>Utah</item>
+        <item>Jazz</item>
+        <item>UTA</item>
+    </string-array>
+    <string-array name="id1610612764">
+        <item>1610612764</item>
+        <item>Washington</item>
+        <item>Wizards</item>
+        <item>WAS</item>
+    </string-array>
+</resources>

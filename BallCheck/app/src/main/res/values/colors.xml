@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="black">#FF000000</color>
+	<color name="white">#FFFFFFFF</color>
+
+	<color name="primary">#BDBDBD</color>
+	<color name="primaryVariant">#9E9E9E</color>
+	<color name="secondary">#35363A</color>
+	<color name="secondaryVariant">#222325</color>
+
+	<color name="darkPrimary">#35363A</color>
+	<color name="darkPrimaryVariant">#222325</color>
+	<color name="darkSecondary">#424242</color>
+	<color name="darkSecondaryVariant">#212121</color>
+
+</resources>
