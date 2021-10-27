@@ -112,7 +112,6 @@ class MainActivity : AppCompatActivity() {
                     val urlFull = urlBase + urlDate + urlScores
                     refreshNBA(urlFull)
                 } else {
-                    calendar.add(Calendar.DATE, 1)
                     val urlDate = SimpleDateFormat("yyyyMMdd").format(calendar.time)
                     val urlFull = urlBase + urlDate + urlScores
                     refreshNBA(urlFull)
@@ -269,6 +268,7 @@ class MainActivity : AppCompatActivity() {
 
 //        call request
         queue.add(request)
+        today.add(Calendar.DATE, 1)
         return result
     }
 }
