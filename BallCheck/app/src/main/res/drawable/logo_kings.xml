@@ -3,8 +3,8 @@
     android:name="vector"
     android:width="198dp"
     android:height="226dp"
-    android:viewportWidth="198"
-    android:viewportHeight="226">
+    android:viewportWidth="200"
+    android:viewportHeight="228">
     <group android:name="wrapper">
         <clip-path
             android:name="clip_path"

@@ -1,9 +1,13 @@
 package com.nicovert.ballcheck
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
-import android.view.View
+import android.view.*
+import android.view.View.*
+import android.widget.DatePicker
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,18 +17,25 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_nba_now.*
 import org.json.JSONException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NBANowFragment : Fragment(R.layout.fragment_nba_now) {
-
+class NBANowFragment : Fragment(R.layout.fragment_nba_now), DatePickerDialog.OnDateSetListener {
     private lateinit var queue: RequestQueue
     private lateinit var swipeToRefresh: SwipeRefreshLayout
+    private lateinit var urlBase: String
+    private lateinit var urlScores: String
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setHasOptionsMenu(true)
+
+        urlBase = getString(R.string.nbaURLbase)
+        urlScores = getString(R.string.nbaURLscores)
 
         swipeToRefresh = swipeRefresh
         swipeToRefresh.setOnRefreshListener {
@@ -34,10 +45,34 @@ class NBANowFragment : Fragment(R.layout.fragment_nba_now) {
         refreshNow()
     }
 
+    override fun onStart() {
+        super.onStart()
+        (activity as AppCompatActivity).supportActionBar?.title = "NBA"
+        (activity as AppCompatActivity).supportActionBar?.subtitle = "Now"
+    }
+
+    override fun onResume() {
+        super.onResume()
+        refreshNow()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menuRefresh -> refreshNow()
+            R.id.menuDate -> showDatePicker()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun refreshNow() {
+        (activity as AppCompatActivity).supportActionBar?.subtitle = "Now"
+        refreshBar.visibility = VISIBLE
         val calendar = Calendar.getInstance()
-        val urlBase = "https://data.nba.net/prod/v2/"
-        val urlScores = "/scoreboard.json"
 
         if (calendar.get(Calendar.HOUR_OF_DAY) < 3 && stillActive(calendar, urlBase, urlScores)) {
             Log.d("stillActive: ", "loading yesterday")
@@ -52,10 +87,18 @@ class NBANowFragment : Fragment(R.layout.fragment_nba_now) {
         }
     }
 
+    private fun refreshThen(date: String?) {
+        if (date != null) {
+            refreshBar.visibility = VISIBLE
+            refreshNBA(urlBase+date+urlScores)
+        } else {
+            refreshNow()
+        }
+    }
+
     private fun refreshNBA(url: String) {
         //Log.d("rNBA: ", "entered")
-        var urlTest = "https://data.nba.net/prod/v2/20211108/scoreboard.json"
-        Toast.makeText(activity, "Refreshing...", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(activity, "Refreshing...", Toast.LENGTH_SHORT).show()
         queue = Volley.newRequestQueue(activity)
         val request = JsonObjectRequest(Request.Method.GET, url, null,
             Response.Listener {
@@ -87,18 +130,30 @@ class NBANowFragment : Fragment(R.layout.fragment_nba_now) {
                         } else {
                             val gamePeriods = game.getJSONObject("period")
                             val quarter = gamePeriods.getInt("current")
+                            val quarterEnd = gamePeriods.getBoolean("isEndOfPeriod")
+                            val halftime = gamePeriods.getBoolean("isHalftime")
                             var quarterString = ""
+                            var quarterTime = ""
                             if (quarter == 1)
-                                quarterString = "1ST "
+                                quarterString = "1ST"
                             else if (quarter == 2)
-                                quarterString = "2ND "
+                                quarterString = "2ND"
                             else if (quarter == 3)
-                                quarterString = "3RD "
+                                quarterString = "3RD"
                             else if (quarter == 4)
-                                quarterString = "4TH "
+                                quarterString = "4TH"
                             else if (quarter > gamePeriods.getInt("maxRegular"))
-                                quarterString = "OT "
-                            clock = "" + quarterString + game.getString("clock")
+                                quarterString = "OT"
+
+                            if (quarterEnd)
+                                quarterTime = "END"
+                            else
+                                quarterTime = game.getString("clock")
+
+                            if (halftime)
+                                clock = "HALFTIME"
+                            else
+                                clock = quarterString + " " + quarterTime
                         }
 //                      get team info (name, tricode, logo) via ids and local string arrays
                         val vTeam = game.getJSONObject("vTeam")
@@ -190,7 +245,7 @@ class NBANowFragment : Fragment(R.layout.fragment_nba_now) {
                     recycler_view.adapter = NowAdapter(nowList)
                     recycler_view.layoutManager = LinearLayoutManager(activity)
                     recycler_view.setHasFixedSize(true)
-
+                    refreshBar.visibility = GONE
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -249,6 +304,23 @@ class NBANowFragment : Fragment(R.layout.fragment_nba_now) {
         queue.add(request)
         today.add(Calendar.DATE, 1)
         return result
+    }
+
+    private fun showDatePicker() {
+        var year = Calendar.getInstance().get(Calendar.YEAR)
+        var month = Calendar.getInstance().get(Calendar.MONTH)
+        var day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+
+        var datePickerDialog = DatePickerDialog(requireContext(), this, year, month, day)
+        datePickerDialog.datePicker.minDate = 1414468800000
+        datePickerDialog.show()
+    }
+
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        Log.d("fragment date","year: " + year.toString() + " month: " + month.toString() + " dayOfMonth: " + dayOfMonth.toString())
+        val date = year.toString() + (month+1).toString() + String.format("%02d", dayOfMonth);
+        (activity as AppCompatActivity).supportActionBar?.subtitle = year.toString() + "-" + (month+1).toString() + "-" + String.format("%02d", dayOfMonth)
+        refreshThen(date)
     }
 
 }

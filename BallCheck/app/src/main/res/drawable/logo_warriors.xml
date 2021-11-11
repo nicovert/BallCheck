@@ -3,8 +3,8 @@
     android:name="vector"
     android:width="220dp"
     android:height="220dp"
-    android:viewportWidth="220"
-    android:viewportHeight="220">
+    android:viewportWidth="223"
+    android:viewportHeight="223">
     <path
         android:name="path_4"
         android:pathData="M 220.5 110.3 C 220.5 171.2 171.1 220.6 110.2 220.6 C 49.3 220.6 0 171.2 0 110.3 C 0 49.4 49.4 0 110.3 0 C 171.2 0 220.5 49.4 220.5 110.3"
