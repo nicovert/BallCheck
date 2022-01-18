@@ -8,11 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.now_item.view.*
 
-class NowAdapter(private val nowList: List<NowItem>) : RecyclerView.Adapter<NowAdapter.ViewHolder>() {
+class NowAdapter(private val nowList: List<NowItem>, private val onGameListener: OnGameListener) : RecyclerView.Adapter<NowAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.now_item, parent, false)
-        return ViewHolder(itemView)
+        return ViewHolder(itemView, onGameListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -30,7 +30,7 @@ class NowAdapter(private val nowList: List<NowItem>) : RecyclerView.Adapter<NowA
 
     override fun getItemCount() = nowList.size
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, val onGameListener: OnGameListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val imageAway: ImageView = itemView.teamImageAway
         val imageHome: ImageView = itemView.teamImageHome
         val imageDot: ImageView = itemView.imageSeparator
@@ -39,5 +39,17 @@ class NowAdapter(private val nowList: List<NowItem>) : RecyclerView.Adapter<NowA
         val textTriHome: TextView = itemView.tricodeHome
         val textScoreAway: TextView = itemView.scoreAway
         val textScoreHome: TextView = itemView.scoreHome
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            onGameListener.onGameClick(absoluteAdapterPosition)
+        }
+    }
+
+    interface OnGameListener {
+        fun onGameClick(position: Int)
     }
 }

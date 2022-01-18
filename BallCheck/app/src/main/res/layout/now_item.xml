@@ -7,7 +7,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="?android:attr/selectableItemBackground">
 
         <!--    Visiting Team    -->
         <ImageView
@@ -24,32 +25,32 @@
             android:id="@+id/tricodeAway"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
+            android:layout_marginLeft="-5dp"
             android:layout_marginTop="100dp"
             android:layout_toLeftOf="@id/imageSeparator"
-            android:layout_marginLeft="-5dp"
+            android:scrollbars="none"
             android:text="UNK"
-            android:textSize="20sp"
-            android:scrollbars="none"/>
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/scoreAway"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_toRightOf="@id/teamImageAway"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="40dp"
+            android:layout_toRightOf="@id/teamImageAway"
+            android:scrollbars="none"
             android:text="0"
-            android:textSize="40sp"
-            android:scrollbars="none"/>
+            android:textSize="40sp" />
 
         <!--    Team Score Separator    -->
         <View
+            android:id="@+id/scoreSeparator"
             android:layout_width="2dp"
             android:layout_height="25dp"
-            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/rounded_corner_view"
-            android:id="@+id/scoreSeparator"/>
+            android:layout_centerVertical="true"
+            android:background="@drawable/rounded_corner_view" />
 
         <!--    Home Team    -->
         <ImageView
@@ -67,22 +68,22 @@
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginTop="100dp"
-            android:layout_toRightOf="@id/imageSeparator"
             android:layout_marginRight="-5dp"
+            android:layout_toRightOf="@id/imageSeparator"
+            android:scrollbars="none"
             android:text="UNK"
-            android:textSize="20sp"
-            android:scrollbars="none"/>
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/scoreHome"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_toLeftOf="@id/teamImageHome"
-            android:layout_marginRight="5dp"
             android:layout_marginTop="40dp"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@id/teamImageHome"
+            android:scrollbars="none"
             android:text="0"
-            android:textSize="40sp"
-            android:scrollbars="none"/>
+            android:textSize="40sp" />
 
         <!--    Clock    -->
         <TextView
@@ -91,12 +92,12 @@
             android:layout_height="35dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:text="QTR 0:00"
-            android:textSize="25sp"
             android:background="@drawable/rounded_corner_view"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:scrollbars="none"/>
+            android:scrollbars="none"
+            android:text="QTR 0:00"
+            android:textSize="25sp" />
 
         <ImageView
             android:id="@+id/imageSeparator"

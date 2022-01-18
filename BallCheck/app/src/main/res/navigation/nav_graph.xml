@@ -13,7 +13,7 @@
     <fragment
         android:id="@+id/WNBANowFragment"
         android:name="com.nicovert.ballcheck.WNBANowFragment"
-        android:label="WNow"
+        android:label="Now"
         tools:layout="@layout/fragment_wnba_now" />
     <fragment
         android:id="@+id/settingsFragment"
@@ -24,4 +24,9 @@
         android:name="com.nicovert.ballcheck.AboutFragment"
         android:label="About"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/NBAGameFragment"
+        android:name="com.nicovert.ballcheck.NBAGameFragment"
+        android:label="Game"
+        tools:layout="@layout/fragment_nba_game" />
 </navigation>

@@ -61,6 +61,10 @@ class MainActivity : AppCompatActivity() {
             openURL.data = Uri.parse("https://github.com/google/material-design-icons")
         } else if (view.id === thanksApache.id) {
             openURL.data = Uri.parse("https://www.apache.org/licenses/LICENSE-2.0")
+        } else if (view.id === thanksNBASense.id) {
+            openURL.data = Uri.parse("http://nbasense.com/")
+        } else if (view.id === thanksPlaintext.id) {
+            openURL.data = Uri.parse("https://plaintextsports.com/")
         }
         startActivity(openURL)
     }

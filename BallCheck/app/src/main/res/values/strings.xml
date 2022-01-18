@@ -2,4 +2,7 @@
     <string name="app_name">Ball Check</string>
     <string name="nbaURLbase">https://data.nba.net/prod/v2/</string>
     <string name="nbaURLscores">/scoreboard.json</string>
+    <string name="nbaURLbase1">https://data.nba.net/prod/v1/</string>
+    <string name="nbaURLbaseCMS">https://data.nba.net/json/cms/noseason/game/</string>
+    <string name="nbaURLbox">boxscore.json</string>
 </resources>

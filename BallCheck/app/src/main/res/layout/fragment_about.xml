@@ -31,7 +31,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Version: 1.4"
+            android:text="Version: 1.5"
             android:textSize="16dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"/>
@@ -55,6 +55,50 @@
             android:text="Thanks"
             android:textSize="24dp"/>
 
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:onClick="clickThanks"
+            android:id="@+id/thanksNBASense"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NBA Sense"
+                android:textSize="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Copyright 2021 Jason Roman"
+                android:textColor="@color/secondary"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:onClick="clickThanks"
+            android:id="@+id/thanksPlaintext"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Plain Text Sports"
+                android:textSize="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="CodeIsTheEnd"
+                android:textColor="@color/secondary"/>
+        </LinearLayout>
         <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"

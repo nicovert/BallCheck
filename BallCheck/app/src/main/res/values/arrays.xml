@@ -258,4 +258,12 @@
         <item>Wizards</item>
         <item>WAS</item>
     </string-array>
+
+    <string-array name="homeTeamFlip">
+        <item>PHX</item>
+        <item>ORL</item>
+    </string-array>
+    <string-array name="awayTeamFlip">
+        <item>UTA</item>
+    </string-array>
 </resources>

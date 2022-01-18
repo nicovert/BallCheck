@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menuYesterday"
+        android:title="View Yesterday"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_history"/>
+    <item
         android:id="@+id/menuDate"
         android:title="Choose Date"
         app:showAsAction="always"

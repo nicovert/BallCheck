@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NBAGameFragment"
+    android:id="@+id/NBAGameFragment">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshGame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp">
+
+                //Header (nowItem)
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:padding="10dp"
+                    android:id="@+id/cardSummary">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <!--    Visiting Team    -->
+                        <ImageView
+                            android:id="@+id/gameTeamImageAway"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="-30dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:src="@drawable/logo_unknown" />
+
+                        <TextView
+                            android:id="@+id/gameTricodeAway"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="-5dp"
+                            android:layout_marginTop="100dp"
+                            android:layout_toLeftOf="@id/gameImageSeparator"
+                            android:scrollbars="none"
+                            android:text="UNK"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/gameScoreAway"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="40dp"
+                            android:layout_toRightOf="@id/gameTeamImageAway"
+                            android:scrollbars="none"
+                            android:text="0"
+                            android:textSize="40sp" />
+
+                        <!--    Team Score Separator    -->
+                        <View
+                            android:id="@+id/gameScoreSeparator"
+                            android:layout_width="2dp"
+                            android:layout_height="25dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/rounded_corner_view" />
+
+                        <!--    Home Team    -->
+                        <ImageView
+                            android:id="@+id/gameTeamImageHome"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="-30dp"
+                            android:layout_marginBottom="10dp"
+                            android:src="@drawable/logo_unknown" />
+
+                        <TextView
+                            android:id="@+id/gameTricodeHome"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:layout_marginTop="100dp"
+                            android:layout_marginRight="-5dp"
+                            android:layout_toRightOf="@id/gameImageSeparator"
+                            android:scrollbars="none"
+                            android:text="UNK"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/gameScoreHome"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="40dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_toLeftOf="@id/gameTeamImageHome"
+                            android:scrollbars="none"
+                            android:text="0"
+                            android:textSize="40sp" />
+
+                        <!--    Clock    -->
+                        <TextView
+                            android:id="@+id/gameClock"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/rounded_corner_view"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:scrollbars="none"
+                            android:text="QTR 0:00"
+                            android:textSize="25sp" />
+
+                        <ImageView
+                            android:id="@+id/gameImageSeparator"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="90dp"
+                            android:src="@drawable/ic_at" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                //Line scores summary
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_below="@id/cardSummary"
+                    android:id="@+id/cardLinescore">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp">
+
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TableRow
+                                android:id="@+id/linescoreHeaderRow">
+                            </TableRow>
+                            <TableRow
+                                android:layout_height="2dp"
+                                android:layout_width="match_parent"
+                                android:layout_margin="2dp">
+                                <View android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:background="@drawable/rounded_corner_view"
+                                    android:layout_weight="1"/>
+                            </TableRow>
+                            <TableRow
+                                android:id="@+id/linescoreAwayRow">
+                            </TableRow>
+                            <TableRow
+                                android:layout_height="2dp"
+                                android:layout_width="match_parent"
+                                android:layout_margin="2dp">
+                                <View android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:background="@drawable/rounded_corner_view"
+                                    android:layout_weight="1"
+                                    android:alpha="0.5"/>
+                            </TableRow>
+                            <TableRow
+                                android:id="@+id/linescoreHomeRow">
+                            </TableRow>
+
+                        </TableLayout>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                //Team box score
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_below="@id/cardLinescore"
+                    android:id="@+id/cardTeamBox">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp">
+
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TableRow>
+                                <TextView android:text=""
+                                    android:layout_column="1"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"/>
+                                <TextView android:text="PITP"
+                                    android:layout_column="2"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"/>
+                                <TextView android:text="FBP"
+                                    android:layout_column="3"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"/>
+                                <TextView android:text="BL"
+                                    android:layout_column="4"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"/>
+                                <TextView android:text="R"
+                                    android:layout_column="5"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"/>
+                                <TextView android:text="TR"
+                                    android:layout_column="6"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"/>
+                                <TextView android:text="TO"
+                                    android:layout_column="7"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"/>
+                                <TextView android:text="TTO"
+                                    android:layout_column="8"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"/>
+                                <TextView android:text="POTO"
+                                    android:layout_column="9"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"/>
+                            </TableRow>
+                            <TableRow
+                                android:layout_height="2dp"
+                                android:layout_width="match_parent"
+                                android:layout_margin="2dp">
+                                <View android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:background="@drawable/rounded_corner_view"
+                                    android:layout_weight="1"/>
+                            </TableRow>
+                            <TableRow>
+                                <TextView android:text="UNK"
+                                    android:layout_column="1"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"
+                                    android:id="@+id/teamBoxTriAway"/>
+                                <TextView android:text="-"
+                                    android:layout_column="2"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"
+                                    android:id="@+id/vPITPtext"/>
+                                <TextView android:text="-"
+                                    android:layout_column="3"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"
+                                    android:id="@+id/vFBPtext"/>
+                                <TextView android:text="-"
+                                    android:layout_column="4"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"
+                                    android:id="@+id/vBLtext"/>
+                                <TextView android:text="-"
+                                    android:layout_column="5"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"
+                                    android:id="@+id/vRtext"/>
+                                <TextView android:text="-"
+                                    android:layout_column="6"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"
+                                    android:id="@+id/vTRtext"/>
+                                <TextView android:text="-"
+                                    android:layout_column="7"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"
+                                    android:id="@+id/vTOtext"/>
+                                <TextView android:text="-"
+                                    android:layout_column="8"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"
+                                    android:id="@+id/vTTOtext"/>
+                                <TextView android:text="-"
+                                    android:layout_column="9"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"
+                                    android:id="@+id/vPOTOtext"/>
+                            </TableRow>
+                            <TableRow
+                                android:layout_height="2dp"
+                                android:layout_width="match_parent"
+                                android:layout_margin="2dp">
+                                <View android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:background="@drawable/rounded_corner_view"
+                                    android:layout_weight="1"
+                                    android:alpha="0.5"/>
+                            </TableRow>
+                            <TableRow>
+                                <TextView android:text="UNK"
+                                    android:layout_column="1"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"
+                                    android:id="@+id/teamBoxTriHome"/>
+                                <TextView android:text="-"
+                                    android:layout_column="2"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"
+                                    android:id="@+id/hPITPtext"/>
+                                <TextView android:text="-"
+                                    android:layout_column="3"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"
+                                    android:id="@+id/hFBPtext"/>
+                                <TextView android:text="-"
+                                    android:layout_column="4"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"
+                                    android:id="@+id/hBLtext"/>
+                                <TextView android:text="-"
+                                    android:layout_column="5"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"
+                                    android:id="@+id/hRtext"/>
+                                <TextView android:text="-"
+                                    android:layout_column="6"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"
+                                    android:id="@+id/hTRtext"/>
+                                <TextView android:text="-"
+                                    android:layout_column="7"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"
+                                    android:id="@+id/hTOtext"/>
+                                <TextView android:text="-"
+                                    android:layout_column="8"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"
+                                    android:id="@+id/hTTOtext"/>
+                                <TextView android:text="-"
+                                    android:layout_column="9"
+                                    android:layout_weight="0.11"
+                                    android:textAlignment="center"
+                                    android:id="@+id/hPOTOtext"/>
+                            </TableRow>
+
+                        </TableLayout>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                //Lead stats
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_below="@id/cardTeamBox"
+                    android:id="@+id/cardLeads">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp">
+
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TableRow>
+                                <TextView
+                                    android:text="Lead Changes"
+                                    android:layout_weight="0.5"
+                                    android:textAlignment="center"/>
+                                <TextView
+                                    android:text="Times Tied"
+                                    android:layout_weight="0.5"
+                                    android:textAlignment="center"/>
+                            </TableRow>
+                            <TableRow
+                                android:layout_margin="2dp">
+                                <View
+                                    android:background="@drawable/rounded_corner_view"
+                                    android:layout_weight="@integer/material_motion_duration_long_1"
+                                    android:layout_height="2dp"/>
+                            </TableRow>
+                            <TableRow>
+                                <TextView
+                                    android:layout_weight="0.5"
+                                    android:text="-"
+                                    android:textAlignment="center"
+                                    android:textSize="30dp"
+                                    android:id="@+id/leadChangesText"/>
+                                <TextView
+                                    android:layout_weight="0.5"
+                                    android:text="-"
+                                    android:textAlignment="center"
+                                    android:textSize="30dp"
+                                    android:id="@+id/timesTiedText"/>
+                            </TableRow>
+                        </TableLayout>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                //Youtube highlights
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:id="@+id/cardHighlights"
+                    android:layout_below="@id/cardLeads"
+                    android:backgroundTint="#EA3223"
+                    android:visibility="gone">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:background="?android:attr/selectableItemBackground">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toLeftOf="@id/cardHighlightsText"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_search"
+                            android:layout_marginRight="4dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="YouTube Highlights"
+                            android:layout_centerInParent="true"
+                            android:id="@+id/cardHighlightsText"
+                            android:textSize="16sp"
+                            android:textAlignment="center"/>
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                //Box score
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_below="@id/cardLeads"
+                    android:id="@+id/cardBoxscore">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp">
+
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tableBoxScore">
+
+                            <TableRow>
+                                <TextView
+                                    android:text="MIN"
+                                    android:layout_column="1"
+                                    android:layout_weight=".09"
+                                    android:textAlignment="center"/>
+                                <TextView
+                                    android:text="FG"
+                                    android:layout_column="2"
+                                    android:layout_weight=".09"
+                                    android:textAlignment="center"/>
+                                <TextView
+                                    android:text="3P"
+                                    android:layout_column="3"
+                                    android:layout_weight=".09"
+                                    android:textAlignment="center"/>
+                                <TextView
+                                    android:text="FT"
+                                    android:layout_column="4"
+                                    android:layout_weight=".09"
+                                    android:textAlignment="center"/>
+                                <TextView
+                                    android:text="R"
+                                    android:layout_column="5"
+                                    android:layout_weight=".09"
+                                    android:textAlignment="center"/>
+                                <TextView
+                                    android:text="A"
+                                    android:layout_column="6"
+                                    android:layout_weight=".09"
+                                    android:textAlignment="center"/>
+                                <TextView
+                                    android:text="S"
+                                    android:layout_column="7"
+                                    android:layout_weight=".09"
+                                    android:textAlignment="center"/>
+                                <TextView
+                                    android:text="B"
+                                    android:layout_column="8"
+                                    android:layout_weight=".09"
+                                    android:textAlignment="center"/>
+                                <TextView
+                                    android:text="TO"
+                                    android:layout_column="9"
+                                    android:layout_weight=".09"
+                                    android:textAlignment="center"/>
+                                <TextView
+                                    android:text="PF"
+                                    android:layout_column="10"
+                                    android:layout_weight=".09"
+                                    android:textAlignment="center"/>
+                                <TextView
+                                    android:text="PTS"
+                                    android:layout_column="11"
+                                    android:layout_weight=".09"
+                                    android:textAlignment="center"/>
+                            </TableRow>
+                            <TableRow
+                                android:layout_margin="2dp">
+                                <View
+                                    android:background="@drawable/rounded_corner_view"
+                                    android:layout_weight="1"
+                                    android:layout_height="2dp"/>
+                            </TableRow>
+                        </TableLayout>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                //NBA.com box score link
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_below="@id/cardBoxscore"
+                    android:id="@+id/cardWebFullBox">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        android:background="?android:attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toLeftOf="@id/cardWebFullBoxText"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_link"
+                            android:layout_marginRight="4dp"
+                            android:backgroundTint="@color/white"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="View Full Box Score (NBA.com)"
+                            android:layout_centerInParent="true"
+                            android:textAlignment="center"
+                            android:textSize="16sp"
+                            android:id="@+id/cardWebFullBoxText"/>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                //Game location (arena, city, state, country, etc)
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_below="@id/cardWebFullBox"
+                    android:id="@+id/cardLocation">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toLeftOf="@id/cardLocationText"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_location"
+                            android:layout_marginRight="4dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Unknown Location"
+                            android:layout_centerInParent="true"
+                            android:textAlignment="center"
+                            android:textSize="16sp"
+                            android:id="@+id/cardLocationText"/>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                //Officials
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_below="@id/cardLocation"
+                    android:id="@+id/cardOfficials">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toLeftOf="@id/cardOfficialsText"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_whistle"
+                            android:layout_marginRight="4dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Officials Unknown"
+                            android:layout_centerInParent="true"
+                            android:textAlignment="center"
+                            android:textSize="16sp"
+                            android:id="@+id/cardOfficialsText"/>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <ProgressBar
+        android:id="@+id/gameRefreshBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginTop="-4dp"
+        android:indeterminate="true"
+        android:scaleY="2"
+        android:visibility="gone" />
+
+</RelativeLayout>
